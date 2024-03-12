@@ -7,4 +7,4 @@
     # 3 Template matching på kongekroner for at se om der er krone på feltet
     # 4 BLOB detection (grass-fire)
     # 5 Tæl felter i BLOBS, tæl antal af kroner, udregn hvor mange point den blob udgør
-    # 6 Tag sum af blob point
+    # 6 Tag sum af blob point 
