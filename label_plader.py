@@ -21,8 +21,8 @@ while image_file_number < len(image_files) and flag:
     if keyboard.is_pressed('esc'):
         break
     
-    current_state_d = keyboard.is_pressed('d')
-    if current_state_d and image_file_number < len(image_files):
+    # current_state_d = keyboard.is_pressed('d')
+    if image_file_number < len(image_files):
         image_scores = []  # List to store scores for the current image
         # print(f"Enter scores for Image {image_file_number+1}:")
         # Collect scores for each attribute
@@ -44,11 +44,6 @@ while image_file_number < len(image_files) and flag:
         if flag == 'y':
             flag = True
 
-    current_state_a = keyboard.is_pressed('a')
-    if current_state_a and image_file_number > 0:
-        image_file_number -= 1
-        cv2.destroyAllWindows()  # Close current image window
-        break
 
 
 def save_file(output_path, lst_name, file_name):
