@@ -14,10 +14,11 @@ class RoiHandler:
 
 def load_image(image_file_number):
     image = cv2.imread(image_files[image_file_number])
-    image_small = cv2.resize(image, (1200,800))
+    # image_small = cv2.resize(image, (1200,800))
+    image_small = cv2.resize(image, (500,500))
     return (image, image_small)
 
-image_files = glob.glob("King Domino dataset/Full game areas/DSC_*.JPG")
+image_files = glob.glob("King Domino dataset/Cropped and perspective corrected boards/*.JPG")
 image_file_number = 0
 image, image_small = load_image(image_file_number)
 
@@ -40,7 +41,7 @@ while True:
     elif len(roi.points) == 4 and key == 32: # Space
         src_points = np.array([(x*5, y*5) for x, y in roi.points])
         transform, _ = cv2.findHomography(src_points, dst_points)
-        adjusted_image = cv2.warpPerspective(image, transform, (500,500))
+        adjusted_image = cv2.warpPerspective(image, transform, (500,500)) # Change the size here
         filename = f"{output_file_number}.jpg"
         cv2.imwrite(filename, adjusted_image)
         print(f"Saved {filename}.")
