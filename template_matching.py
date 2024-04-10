@@ -11,7 +11,7 @@ def TemplateMatching(image_files, template_files):
         for template_file in template_files:
             template = cv2.imread(template_file, cv2.COLOR_BGR2RGB)
             # Save the template dimensions
-            W, H = template.shape[:2]  # Corrected the order of dimensions
+            W, H = template.shape[:2]  
             
             # Perform template matching
             match = cv2.matchTemplate(image=image, templ=template, method=cv2.TM_CCOEFF_NORMED)
