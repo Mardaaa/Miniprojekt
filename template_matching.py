@@ -9,6 +9,8 @@ def distance(p1, p2):
 
 def TemplateMatching(image_files, template_files):
     image_counter = 0
+    tile_size = 100  # Size of each tile
+
     for image_file in image_files:
         image = cv2.imread(image_file)
         image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # Convert BGR image to HSV
@@ -59,6 +61,12 @@ def TemplateMatching(image_files, template_files):
             for (x1, y1, x2, y2) in boxes:
                 # Draw the bounding box on the image
                 cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 1)
+
+        for (x1, y1) in blob_centers:
+                            # Calculate tile coordinates
+            tile_x = x1 // tile_size
+            tile_y = y1 // tile_size
+            print(f"Crown is on tile ({tile_x}, {tile_y})")
         
         print(f"Number of crowns: {len(blob_centers)}")
 
