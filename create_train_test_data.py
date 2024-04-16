@@ -35,21 +35,35 @@ def calculate_average_hsv(image_path):
 
 
 
-def convert_hsv_to_csv(image_folder):
-    col_name = "Field"
-    df = pd.DataFrame()
-    for image in image_folder:
-        calculate_average_hsv(image)
-
+def convert_hsv_to_csv(image_folder, label):
+    col_names = ['H_mean', 'S_mean', 'V_mean', 'label', 'name_pic']
+    df = pd.DataFrame(columns=col_names)
+    
+    for image_file in os.listdir(image_folder):
+        if image_file.endswith(('.jpg', '.png', '.jpeg')):
+            image_path = os.path.join(image_folder, image_file)
+            h_mean, s_mean, v_mean = calculate_average_hsv(image_path)
+            name_pic = image_file.split('\\')[-1]
+            df = df.append({'H_mean': h_mean, 'S_mean': s_mean, 'V_mean': v_mean, 'label': label, 'name_pic': name_pic}, ignore_index=True)
+    
+    return df
         
 
 
 image_files = glob.glob("King Domino dataset/Cropped and perspective corrected boards/*.jpg")
-image_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
+field_folder = glob.glob("Categories/Field/*.png")
 
 
 if __name__ == '__main__':
     # data_splitter(image_files)
-    print(image_folder)
+    # print(image_folder)
     # var = calculate_average_hsv(image_folder[0])
+    var = convert_hsv_to_csv(image_folder,'Field')
     print(var)
