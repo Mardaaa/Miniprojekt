@@ -22,9 +22,12 @@ def data_splitter(image_files, test_size=0.2, random_state=42):
         os.makedirs("test data", exist_ok=True)
         shutil.copy(file, dest_path)
 
-
+def calc_hsv_and_label(image):
+    
 
 image_files = glob.glob("King Domino dataset/Cropped and perspective corrected boards/*.jpg")
+
+
 
 if __name__ == '__main__':
     data_splitter(image_files)
