@@ -50,6 +50,9 @@ def convert_hsv_to_csv(list_subfolders):
                 name_pic = os.path.basename(image_file)
                 df = df._append({'H_mean': h_mean, 'S_mean': s_mean, 'V_mean': v_mean, 'label': subfolder, 'name_pic': name_pic}, ignore_index=True)
     
+        # Shuffle the DataFrame
+    df = df.sample(frac=1).reset_index(drop=True)
+
     return df
 
 
@@ -93,10 +96,6 @@ def list_subfolders(source_folder):
         print("There are no subfolders within", source_folder)
     return subfolders
 
-def allocate_values_to_train_test(df, train_data_path, test_data_path):
-    pass
-
-
 
 image_files = glob.glob("King Domino dataset/Cropped and perspective corrected boards/*.jpg") # For splitting the data
 source_folder = "Categories/" # For calculating HSV-values for tiles
@@ -110,5 +109,7 @@ if __name__ == '__main__':
     # print(train_data_path)
     # allocate_values_to_train_test(df)
     
+        # Save DataFrame to CSV file
+    df.to_csv('hsv_values.csv', index=False)
 
 
