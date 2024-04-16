@@ -6,6 +6,8 @@ from sklearn.model_selection import train_test_split
 import cv2
 import pandas as pd
 import csv
+import warnings
+warnings.filterwarnings('ignore')
 
 def data_splitter(image_files, test_size=0.2, random_state=42):
     # Split the data into training and testing sets
@@ -35,35 +37,78 @@ def calculate_average_hsv(image_path):
 
 
 
-def convert_hsv_to_csv(image_folder, label):
+def convert_hsv_to_csv(list_subfolders):
     col_names = ['H_mean', 'S_mean', 'V_mean', 'label', 'name_pic']
     df = pd.DataFrame(columns=col_names)
     
-    for image_file in os.listdir(image_folder):
-        if image_file.endswith(('.jpg', '.png', '.jpeg')):
-            image_path = os.path.join(image_folder, image_file)
-            h_mean, s_mean, v_mean = calculate_average_hsv(image_path)
-            name_pic = image_file.split('\\')[-1]
-            df = df.append({'H_mean': h_mean, 'S_mean': s_mean, 'V_mean': v_mean, 'label': label, 'name_pic': name_pic}, ignore_index=True)
+    for subfolder in list_subfolders:
+        image_folder = glob.glob(f"Categories/{subfolder}/*png")
+        
+        for image_file in image_folder:
+            if image_file.endswith(('.jpg', '.png', '.jpeg')):
+                h_mean, s_mean, v_mean = calculate_average_hsv(image_file)
+                name_pic = os.path.basename(image_file)
+                df = df._append({'H_mean': h_mean, 'S_mean': s_mean, 'V_mean': v_mean, 'label': subfolder, 'name_pic': name_pic}, ignore_index=True)
     
     return df
-        
 
 
-image_files = glob.glob("King Domino dataset/Cropped and perspective corrected boards/*.jpg")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
-field_folder = glob.glob("Categories/Field/*.png")
+def list_subfolders(source_folder):
+    """
+    Description:
+    ---------------------------
+    A function that finds the name of subfolders within a source folder.
+    Subfolders are the different cranes, each containing CSV-files.
+    ---------------------------
+    
 
+    Parameters:
+    ---------------------------
+    - source_folder: Path to the source folder
+    ---------------------------
+
+    Returns:
+    ---------------------------
+    List of subfolder names
+    ---------------------------
+    """
+
+    # Check if the source folder exists
+    if not os.path.exists(source_folder):
+        print(f"The source folder '{source_folder}' does not exist.")
+        return
+
+    # Get a list of all items (files and folders) in the source folder
+    items = os.listdir(source_folder)
+
+    # Filter out only the subfolders
+    subfolders = [item for item in items if os.path.isdir(os.path.join(source_folder, item))]
+
+    # Print the names of the subfolders
+    if subfolders:
+        print("Subfolders within", source_folder, ":")
+        for folder in subfolders:
+            print(folder)
+    else:
+        print("There are no subfolders within", source_folder)
+    return subfolders
+
+def allocate_values_to_train_test(df, train_data_path, test_data_path):
+    pass
+
+
+
+image_files = glob.glob("King Domino dataset/Cropped and perspective corrected boards/*.jpg") # For splitting the data
+source_folder = "Categories/" # For calculating HSV-values for tiles
 
 if __name__ == '__main__':
     # data_splitter(image_files)
-    # print(image_folder)
-    # var = calculate_average_hsv(image_folder[0])
-    var = convert_hsv_to_csv(image_folder,'Field')
-    print(var)
+    list_of_subfolders = list_subfolders(source_folder)
+    list_of_subfolders = list_of_subfolders[1:]
+    df = convert_hsv_to_csv(list_of_subfolders)
+    print(df)
+    # print(train_data_path)
+    # allocate_values_to_train_test(df)
+    
+
+
