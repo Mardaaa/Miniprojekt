@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import cv2
 import pandas as pd
 import csv
+import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -32,13 +33,15 @@ def calculate_average_hsv(image_path):
     # Convert the image from BGR to HSV
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     # Calculate the average HSV values
-    average_hsv = hsv_image.mean(axis=0).mean(axis=0)
-    return average_hsv
+    # average_hsv = hsv_image.median(axis=0).median(axis=0)
+        # Calculate the median HSV values
+    median_hsv = np.median(hsv_image, axis=(0,1))
+    return median_hsv
 
 
 
 def convert_hsv_to_csv(list_subfolders):
-    col_names = ['H_mean', 'S_mean', 'V_mean', 'label', 'name_pic']
+    col_names = ['H_median', 'S_median', 'V_median', 'label', 'name_pic']
     df = pd.DataFrame(columns=col_names)
     
     for subfolder in list_subfolders:
@@ -48,7 +51,7 @@ def convert_hsv_to_csv(list_subfolders):
             if image_file.endswith(('.jpg', '.png', '.jpeg')):
                 h_mean, s_mean, v_mean = calculate_average_hsv(image_file)
                 name_pic = os.path.basename(image_file)
-                df = df._append({'H_mean': h_mean, 'S_mean': s_mean, 'V_mean': v_mean, 'label': subfolder, 'name_pic': name_pic}, ignore_index=True)
+                df = df._append({'H_median': h_mean, 'S_median': s_mean, 'V_median': v_mean, 'label': subfolder, 'name_pic': name_pic}, ignore_index=True)
     
         # Shuffle the DataFrame
     df = df.sample(frac=1).reset_index(drop=True)
