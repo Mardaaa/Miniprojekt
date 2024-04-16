@@ -106,9 +106,6 @@ if __name__ == '__main__':
     list_of_subfolders = list_of_subfolders[1:]
     df = convert_hsv_to_csv(list_of_subfolders)
     print(df)
-    # print(train_data_path)
-    # allocate_values_to_train_test(df)
-    
         # Save DataFrame to CSV file
     df.to_csv('hsv_values.csv', index=False)
 
