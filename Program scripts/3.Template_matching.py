@@ -3,7 +3,8 @@ import cv2
 from imutils.object_detection import non_max_suppression
 import numpy as np
 
-image_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/King Domino dataset/*.jpg'
+# image_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/King Domino dataset/*.jpg'
+image_files_path = 'King Domino dataset/Cropped and perspective corrected boards/*jpg'
 template_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/Scripts/Crown images/*.jpg'
 
 image_files = glob.glob(image_files_path)
