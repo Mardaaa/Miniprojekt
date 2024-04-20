@@ -4,9 +4,9 @@ from imutils.object_detection import non_max_suppression
 import numpy as np
 
 # image_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/King Domino dataset/*.jpg'
-image_files_path = 'King Domino dataset/Cropped and perspective corrected boards/*jpg'
+image_files_path = 'King Domino dataset/Cropped and perspective corrected boards/*.jpg'
 # template_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/Scripts/Crown images/*.jpg'
-
+template_files_path = 'King Domino dataset/Crown images/*.jpg'
 
 image_files = glob.glob(image_files_path)
 template_files = glob.glob(template_files_path)
@@ -77,6 +77,14 @@ def TemplateMatching(image_files, template_files):
             tile_y = x1 // tile_size
             crown_cordinates.append((tile_x, tile_y))
         print(f"Crown cordinates {crown_cordinates} and number of crowns {len(blob_centers)}")
+
+
+        # Show the final output
+        # cv2.imshow("Image with identified crowns", image)
+        # cv2.waitKey(0)
+        
+        # # Destroy all the windows
+        # cv2.destroyAllWindows()
         
     return crown_cordinates
 
