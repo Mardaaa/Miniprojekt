@@ -9,5 +9,7 @@
     # 5 Tæl felter i BLOBS, tæl antal af kroner, udregn hvor mange point den blob udgør
     # 6 Tag sum af blob point
 
-    dfgdfg
+    TO DO 
+    Files paths stemmer ikke overens med hvad funktionerne bruger
+    Redo vores pipeline
     
