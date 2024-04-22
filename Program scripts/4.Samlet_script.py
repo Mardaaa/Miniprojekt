@@ -115,10 +115,12 @@ def find_connected_components(classified_tiles, grid_size=(5, 5)):
             components[current_type].append(component)
     return components
 
+# Calculate Euclidean distance between two points
 def distance(p1, p2):
     """Calculate Euclidean distance between two points."""
     return np.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
+# Template matching
 def TemplateMatching(image_files, template_files):
     tile_size = 100  # Size of each tile
 
@@ -221,7 +223,7 @@ if __name__ == '__main__':
         crown_coordinates = TemplateMatching([board_image_path], template_files)
         # Count the number of crowns in each blob and store the results
         count_crowns_in_blobs(crown_coordinates, components, all_results, image_name)
-        
+
     # Convert results to DataFrame and save to CSV
     results_df = pd.DataFrame(all_results)
     results_df.to_csv('/Users/jens-jakobskotingerslev/Documents/GitHub/Miniprojekt/Scripts/Resultater2.csv', index=False)
