@@ -1,5 +1,6 @@
 import pandas as pd
 
+# Define the function to transform and compare the results
 def transform_and_compare(results_path, labels_path, transformed_output_path, comparison_output_path):
     # Load the original results and labels data
     results_df = pd.read_csv(results_path)
@@ -23,7 +24,7 @@ def transform_and_compare(results_path, labels_path, transformed_output_path, co
     
     # Rename columns according to the mapping and fill missing columns with zeros
     pivot_df = pivot_df.rename(columns=tile_type_to_column)
-    for column in labels_df.columns[1:-1]:  # Skip 'Image Number' and 'Total score'
+    for column in labels_df.columns[1:-1]:
         if column not in pivot_df.columns:
             pivot_df[column] = 0
     pivot_df = pivot_df[labels_df.columns[1:-1]]
