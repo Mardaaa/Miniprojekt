@@ -58,8 +58,8 @@ def transform_and_compare(results_path, labels_path, transformed_output_path, co
     comparison_df.to_csv(comparison_output_path, index=False)
 
 transform_and_compare(
-    '/Users/jens-jakobskotingerslev/Documents/GitHub/Miniprojekt/Scripts/Resultater.csv',
-    '/Users/jens-jakobskotingerslev/Documents/GitHub/Miniprojekt/Scripts/Labels.csv',
-    '/Users/jens-jakobskotingerslev/Documents/GitHub/Miniprojekt/Scripts/Transformerede_resultater.csv',
-    '/Users/jens-jakobskotingerslev/Documents/GitHub/Miniprojekt/Scripts/Sammenligning_af_resultater.csv'
+    "CSV_filer/Resultater3.csv",
+    "CSV_filer/Labels.csv",
+    "CSV_filer/Transformerede_resultater2.csv",
+    "CSV_filer/Sammenligning_af_resultater2.csv"
 )

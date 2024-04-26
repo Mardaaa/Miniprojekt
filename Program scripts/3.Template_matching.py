@@ -3,9 +3,8 @@ import cv2
 from imutils.object_detection import non_max_suppression
 import numpy as np
 
-# image_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/King Domino dataset/*.jpg'
+# File paths
 image_files_path = 'King Domino dataset/Cropped and perspective corrected boards/*.jpg'
-# template_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/Scripts/Crown images/*.jpg'
 template_files_path = 'King Domino dataset/Crown images/*.jpg'
 
 image_files = glob.glob(image_files_path)
@@ -80,11 +79,11 @@ def TemplateMatching(image_files, template_files):
 
 
         # Show the final output
-        # cv2.imshow("Image with identified crowns", image)
-        # cv2.waitKey(0)
+        #cv2.imshow("Image with identified crowns", image)
+        #cv2.waitKey(0)
         
-        # # Destroy all the windows
-        # cv2.destroyAllWindows()
+        # Destroy all the windows
+        #cv2.destroyAllWindows()
         
     return crown_cordinates
 

@@ -23,8 +23,8 @@ Image,Tile Type,Blob,Tiles,Crowns,Score
 14.jpg,Lake,1,7,2,14
 14.jpg,Forest,1,1,1,1
 14.jpg,Forest,2,4,1,4
-14.jpg,Swamp,1,3,2,6
-14.jpg,Home,1,1,0,0
+14.jpg,Home,1,2,0,0
+14.jpg,Swamp,1,2,2,4
 13.jpg,Table,1,1,0,0
 13.jpg,Table,2,1,0,0
 13.jpg,Mine,1,1,2,2
@@ -84,11 +84,10 @@ Image,Tile Type,Blob,Tiles,Crowns,Score
 19.jpg,Forest,1,1,0,0
 19.jpg,Forest,2,2,1,2
 19.jpg,Lake,1,1,0,0
-19.jpg,Mine,1,2,4,8
+19.jpg,Mine,1,3,7,21
 19.jpg,Swamp,1,1,0,0
 19.jpg,Swamp,2,1,0,0
 19.jpg,Home,1,1,0,0
-19.jpg,Home,2,1,3,3
 69.jpg,Field,1,5,2,10
 69.jpg,Field,2,1,0,0
 69.jpg,Field,3,1,0,0

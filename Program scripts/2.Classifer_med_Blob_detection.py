@@ -7,20 +7,26 @@ from collections import defaultdict
 import itertools
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier as RF
+from sklearn.metrics import classification_report
+import warnings
+warnings.filterwarnings("ignore", message="X does not have valid feature names")
 
 
 # File paths
-board_images_folder = '/Users/jens-jakobskotingerslev/Desktop/Ren mini projekt/test data'
-csv_file = '/Users/jens-jakobskotingerslev/Desktop/Ren mini projekt/hsv_values.csv'
-template_files_path = '/Users/jens-jakobskotingerslev/Desktop/Miniprojekt semester 2/Scripts/Crown images'
+board_images_folder = ("Præprocessering/test data/*.jpg")
+csv_file = "CSV_filer/hsv_values.csv"
 
 # Glob patterns to load files
-board_image_files = glob.glob(os.path.join(board_images_folder, '*.jpg'))
-template_files = glob.glob(os.path.join(template_files_path, '*.jpg'))
+board_image_files = glob.glob(os.path.join(board_images_folder))
 df = pd.read_csv(csv_file)
+
+# List of test images
+test_list = ["1.jpg", "6.jpg", "9.jpg", "13.jpg", "14.jpg", "18.jpg", "19.jpg", "20.jpg",
+              "26.jpg", "35.jpg", "38.jpg", "40.jpg", "50.jpg", "67.jpg", "69.jpg"]
 
 
 # Make X and y data
+df = df[~df['name_pic'].isin(test_list)]
 df.drop(['name_pic'], axis=1, inplace=True)
 X = df.drop(['label'], axis=1)
 y = df['label']
@@ -127,3 +133,5 @@ if __name__ == '__main__':
         tiles = split_into_tiles(board_img)
         classified_tile_types = classify_tiles(tiles, RFC)
         components = find_connected_components(classified_tile_types)
+        print(components)
+
