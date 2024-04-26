@@ -5,7 +5,7 @@ import numpy as np
 
 # File paths
 image_files_path = 'King Domino dataset/Cropped and perspective corrected boards/*.jpg'
-template_files_path = 'King Domino dataset/Crown images/*.jpg'
+template_files_path = 'Præprocessering/Crown images/*.jpg'
 
 image_files = glob.glob(image_files_path)
 template_files = glob.glob(template_files_path)

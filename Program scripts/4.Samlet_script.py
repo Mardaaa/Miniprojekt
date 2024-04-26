@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore", message="X does not have valid feature names")
 # Paths to CSV and image directories
 board_images_folder = ("Præprocessering/test data/*.jpg")
 csv_file = "CSV_filer/hsv_values.csv"
-template_files_path = 'King Domino dataset/Crown images/*.jpg'
+template_files_path = 'Præprocessering/Crown images/*.jpg'
 
 # Glob patterns to load files
 board_image_files = glob.glob(os.path.join(board_images_folder))
