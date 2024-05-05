@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore", message="X does not have valid feature names")
 
 
 # File paths
-board_images_folder = ("Præprocessering/test data/*.jpg")
+board_images_folder = ("Preprocessing/test data/*.jpg")
 csv_file = "CSV_filer/hsv_values.csv"
 
 # Glob patterns to load files

@@ -11,12 +11,15 @@ warnings.filterwarnings("ignore", message="X does not have valid feature names")
 
 
 #import file paths
-board_images_folder = ("Præprocessering/test data/*.jpg")
-csv_file = "CSV_filer/hsv_values.csv"
+board_images_folder = glob.glob("Preprocessing/test data/*.jpg")
+
+current_directory = os.path.dirname(os.path.abspath(__file__))
+relative_path = "../CSV_filer/hsv_values.csv"
+csv_file_path = os.path.join(current_directory, relative_path)
 
 #load files
-board_image_files = glob.glob(board_images_folder)
-df = pd.read_csv(csv_file)
+df = pd.read_csv(csv_file_path)
+
 
 # List of test images
 test_list = ["1.jpg", "6.jpg", "9.jpg", "13.jpg", "14.jpg", "18.jpg", "19.jpg", "20.jpg",
@@ -74,7 +77,7 @@ def split_into_tiles(board_image, grid_size=(5, 5)):
 if __name__ == '__main__':
     all_results = []
     # for loop to classify tiles
-    for board_image_path in board_image_files:
+    for board_image_path in board_images_folder:
         # Load image
         board_img = cv2.imread(board_image_path)
         # Extract filename for identification

@@ -5,7 +5,7 @@ import numpy as np
 
 # File paths
 image_files_path = 'King Domino dataset/Cropped and perspective corrected boards/*.jpg'
-template_files_path = 'Præprocessering/Crown images/*.jpg'
+template_files_path = 'Preprocessing/Crown images/*.jpg'
 
 image_files = glob.glob(image_files_path)
 template_files = glob.glob(template_files_path)
@@ -21,8 +21,8 @@ def TemplateMatching(image_files, template_files):
     for image_file in image_files:
         image = cv2.imread(image_file)
         image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # Convert BGR image to HSV
-        num_blobs = 0  # Counter for the number of blobs
-        blob_centers = []  # List to store the centers of detected blobs
+        num_crowns = 0  # Counter for the number of crowns
+        crown_centers = []  # List to store the centers of detected crowns
     
         
         # Loop over each template
@@ -48,18 +48,18 @@ def TemplateMatching(image_files, template_files):
             for (x, y) in zip(x_points, y_points):
                 # Update our list of boxes
                 boxes.append((x, y, x + W, y + H))
-                num_blobs += 1  # Increment the counter for each blob
-                # Calculate the center of the detected blob
+                num_crowns += 1  # Increment the counter for each crown
+                # Calculate the center of the detected crown
                 center = ((x + x + W) // 2, (y + y + H) // 2)
-                # Check if the center is close to the centers of previously detected blobs
+                # Check if the center is close to the centers of previously detected crowns
                 close_to_existing = False
-                for blob_center in blob_centers:
-                    if distance(center, blob_center) < 20:  # Adjust the threshold distance as needed
+                for crown_center in crown_centers:
+                    if distance(center, crown_center) < 20:  # Adjust the threshold distance as needed
                         close_to_existing = True
                         break
-                # If not close to existing blob centers, add it to the list
+                # If not close to existing crown centers, add it to the list
                 if not close_to_existing:
-                    blob_centers.append(center)
+                    crown_centers.append(center)
             
             # Apply non-maxima suppression to the rectangles
             boxes = non_max_suppression(np.array(boxes))
@@ -70,12 +70,12 @@ def TemplateMatching(image_files, template_files):
                 cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 1)
 
         crown_cordinates = []
-        for (x1, y1) in blob_centers:
+        for (x1, y1) in crown_centers:
                             # Calculate tile coordinates
             tile_x = y1 // tile_size
             tile_y = x1 // tile_size
             crown_cordinates.append((tile_x, tile_y))
-        print(f"Crown cordinates {crown_cordinates} and number of crowns {len(blob_centers)}")
+        print(f"Crown cordinates {crown_cordinates} and number of crowns {len(crown_centers)}")
 
 
         # Show the final output
