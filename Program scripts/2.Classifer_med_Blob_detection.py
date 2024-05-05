@@ -78,21 +78,22 @@ def find_connected_components(classified_tiles, grid_size=(5, 5)):
     visited = set()
     components = defaultdict(list)
 
-    # Define neighbors
     def dfs(row, col, tile_type):
         # Initialize stack and component
         stack = [(row, col)]
         component = set()
         # while loop to find connected components
         while stack:
-            # pop from queue
+            # pop from stack
             r, c = stack.pop()
             # if statement to check if visited
             if (r, c) in visited:
                 continue
-            # Add to visited and component
+            
+            # Add to visited and component with flipped coordinates
             visited.add((r, c))
-            component.add((r, c))
+            component.add((r, c))  
+
             # for loop to find neighbors
             for nr, nc in neighbors(r, c):
                 # if statement to check if visited and classified tiles
@@ -128,6 +129,7 @@ if __name__ == '__main__':
     all_results = []
     # for loop to iterate over board images
     for board_image_path in board_image_files:
+        print("Image number: ", board_image_path)
         board_img = cv2.imread(board_image_path)
         image_name = os.path.basename(board_image_path)
         tiles = split_into_tiles(board_img)

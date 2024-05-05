@@ -87,14 +87,17 @@ def find_connected_components(classified_tiles, grid_size=(5, 5)):
         component = set()
         # while loop to find connected components
         while stack:
-            # pop from queue
+            # pop from stack
             r, c = stack.pop()
+
             # if statement to check if visited
             if (r, c) in visited:
                 continue
-            # Add to visited and component
+
+            # Add to visited and component with flipped coordinates
             visited.add((r, c))
-            component.add((r, c))
+            component.add((r, c))  
+
             # for loop to find neighbors
             for nr, nc in neighbors(r, c):
                 # if statement to check if visited and classified tiles
@@ -206,8 +209,10 @@ def TemplateMatching(image_files, template_files):
 def count_crowns_in_blobs(crown_coordinates, components, results_list, image_name):
     # Loop through each tile type and its corresponding list of blobs
     for tile_type, blobs in components.items():
+
         # Iterate over each blob and its index within the blobs list
         for blob_index, blob in enumerate(blobs):
+
             # Count how many crown coordinates are present within this specific blob
             count = sum(1 for crown in crown_coordinates if crown in blob)
             # Append a dictionary to results_list containing details about the image,
@@ -227,18 +232,26 @@ if __name__ == '__main__':
     all_results = []
     # Loop through each board image
     for board_image_path in board_image_files:
+        print("Image number: ", board_image_path)
         # Read the board image
         board_img = cv2.imread(board_image_path)
+
         # Extract the image name
         image_name = os.path.basename(board_image_path) 
+
         # Split the board image into tiles
         tiles = split_into_tiles(board_img)
+
         # Classify the tiles using the trained Random Forest Classifier
         classified_tile_types = classify_tiles(tiles, RFC)
+
         # Find connected components in the classified tiles
         components = find_connected_components(classified_tile_types)
+        print(components)
+
         # Perform template matching to detect crowns and their coordinates
         crown_coordinates = TemplateMatching([board_image_path], template_files)
+
         # Count the number of crowns in each blob and store the results
         count_crowns_in_blobs(crown_coordinates, components, all_results, image_name)
 
